@@ -1,6 +1,8 @@
-package models
+package dota
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestTeam_ComputeExperience(t *testing.T) {
 	cases := []struct {

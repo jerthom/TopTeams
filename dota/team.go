@@ -1,4 +1,4 @@
-package models
+package dota
 
 // Team represents
 type Team struct {

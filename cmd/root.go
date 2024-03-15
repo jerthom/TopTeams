@@ -14,9 +14,15 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "topTeams",
 	Short: "A CLI that gets the top N pro DOTA teams",
-	Long:  ``,
+	Long: `This CLI fetches teams for all of the ProPlayers from the opendota API. 
+			It calculates an 'Experience' value for each player, defined by the number of seconds in that player's history.
+			Team Experience is then calculated by the sum of all valid players' experience.
+			The Top N teams are selected by TeamId, and then sorted by Team Experience before being written out to the specified file location.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		n, _ := cmd.Flags().GetInt("numTeams")
+		if n < 0 {
+			log.Fatalf("Invalid value for numTeams; value must be >= zero")
+		}
 
 		teams, err := dota.TopTeams(n)
 		if err != nil {

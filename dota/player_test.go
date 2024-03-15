@@ -1,4 +1,4 @@
-package models
+package dota
 
 import (
 	"encoding/json"
@@ -16,7 +16,13 @@ func (c mockClock) Now() time.Time {
 }
 
 func TestPlayerInput_Output(t *testing.T) {
-	// Mock clock for reliable testing
+	// Restore mocked values once we're done testing
+	tmpC := c
+	defer func() {
+		c = tmpC
+	}()
+
+	// Mock our clock
 	fixedTime := time.Date(2024, 3, 13, 0, 0, 0, 0, time.UTC)
 	c = mockClock{fixedTime}
 
